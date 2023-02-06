@@ -4,27 +4,27 @@
 
 namespace
 {
-    void print(std::vector<std::vector<unsigned>> &input)
+    bool isInSelection(const std::vector<std::vector<unsigned>> &trees, const unsigned &x, const unsigned &y, const unsigned &side)
     {
-        std::cout << "the vector contains:\n";
-        for (const auto &i : input)
+        for (const auto &currentTree : trees)
         {
-            for (const auto &j : i)
+            if (currentTree[0] >= x && currentTree[0] < x + side && currentTree[1] >= y && currentTree[1] < y + side)
             {
-                std::cout << j << " ";
+                return true;
             }
-            std::cout << "\n";
         }
-        std::cout << std::endl;
+        return false;
     }
 }
 
 int main()
 {
     // get input
+    // get yard size
     unsigned canvasSide = 0;
     std::cin >> canvasSide;
 
+    // get tree coordinates
     unsigned inputCount = 0;
     std::cin >> inputCount;
     std::vector<std::vector<unsigned>> trees;
@@ -37,39 +37,21 @@ int main()
         } while (inputln.empty());
 
         unsigned divider = inputln.find(' ');
-        unsigned y = stoul(inputln.substr(0, divider));
         unsigned x = stoul(inputln.substr(divider + 1));
+        unsigned y = stoul(inputln.substr(0, divider));
         
-        // coordinates use 0 based indexing
+        // make coordinates use 0 based indexing
         trees.push_back({x - 1, y - 1});
     }
 
-    print(trees);
-
-    // main process
-    if (trees.size() == 0)
-    {
-        std::cout << canvasSide;
-        return 0;
-    }
-
+    // main process: traverse through the yard
     for (unsigned currentSide = canvasSide; currentSide > 0; currentSide--)
     {
         for (unsigned y = 0; y <= canvasSide - currentSide; y++)
         {
             for (unsigned x = 0; x <= canvasSide - currentSide; x++)
             {
-                // check if a tree is in the selection area
-                bool treeInSelection = false;
-                for (const auto &currentTree : trees)
-                {
-                    if (currentTree[0] >= x && currentTree[0] < x + currentSide && currentTree[1] >= y && currentTree[1] < y + currentSide)
-                    {
-                        treeInSelection = true;
-                        break;
-                    }
-                }
-                if (treeInSelection == false)
+                if (!isInSelection(trees, x, y, currentSide))
                 {
                     std::cout << currentSide;
                     return 0;
