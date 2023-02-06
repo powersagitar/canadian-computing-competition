@@ -2,6 +2,7 @@
 
 int main()
 {
+    unsigned short previous = 0; // 0 is right, 1 is left
     while (true)
     {
         std::string input = "";
@@ -12,8 +13,7 @@ int main()
             break;
         }
 
-        unsigned short sum = input[0] + input[1];
-        unsigned short previous = 0; // 0 is right, 1 is left
+        unsigned short sum = int(input[0]) - '0' + int(input[1]) - '0';
         
         if (sum == 0)
         {
@@ -27,15 +27,18 @@ int main()
                     break;
             }
         }
-        else if (sum % 2 == 0) // sum is even
+        else
         {
-            previous = 0;
-            std::cout << "right ";
-        }
-        else // sum is odd
-        {
-            previous = 1;
-            std::cout << "left ";
+            if (sum % 2 != 0) // sum is odd
+            {
+                previous = 1;
+                std::cout << "left ";
+            }
+            else // sum is even
+            {
+                previous = 0;
+                std::cout << "right ";
+            }
         }
 
         std::cout << input.substr(2) << "\n";
