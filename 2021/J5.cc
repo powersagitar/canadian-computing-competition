@@ -6,8 +6,7 @@ int main()
 {
     // get input
     unsigned m = 0, n = 0;
-    std::cin >> m;
-    std::cin >> n;
+    std::cin >> m >> n;
 
     std::vector<std::string> input;
     unsigned inputCount = 0;
@@ -41,20 +40,31 @@ int main()
 
         switch (inputln[0])
         {
-            case 'R':
-                for (unsigned c = 0; c < m; c++)
-                {
-                    canvas[number][c] = !canvas[number][c];
-                }
-                break;
+        case 'R':
+            for (unsigned c = 0; c < n; c++)
+            {
+                canvas[number][c] = !canvas[number][c];
+            }
+            break;
 
-            case 'C':
-                for (unsigned r = 0; r < n; r++)
-                {
-                    canvas[r][number] = !canvas[r][number];
-                }
-                break;
+        case 'C':
+            for (unsigned r = 0; r < m; r++)
+            {
+                canvas[r][number] = !canvas[r][number];
+            }
+            break;
         }
+
+        // debug: check what the array looks like
+        for (unsigned r = 0; r < m; r++)
+        {
+            for (unsigned c = 0; c < n; c++)
+            {
+                std::clog << canvas[r][c] << " ";
+            }
+            std::clog << "\n";
+        }
+        std::clog << std::endl;
     }
 
     // count gold blocks
