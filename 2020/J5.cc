@@ -3,21 +3,6 @@
 #include <vector>
 #include <algorithm>
 
-namespace
-{
-    bool contains(const std::vector<std::vector<int>> &all, const std::vector<int> &key)
-    {
-        for (const auto &i : all)
-        {
-            if (std::includes(i.begin(), i.end(), key.begin(), key.end()))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
 int main()
 {
     unsigned short m = 0, n = 0;
@@ -44,30 +29,36 @@ int main()
     // main process
     // solution: bfs
     std::vector<std::vector<int>> queue = {{1, 1}}; // this queue uses 1 based indexing
+    std::vector<int> traversedProducts;
     while (queue.size())
     {
         unsigned short r = queue[0][0], c = queue[0][1];
-
         int product = rooms[r - 1][c - 1];
         std::clog << "product: " << product << "\n";
-        for (int firstMultiplier = 1; firstMultiplier <= product; firstMultiplier++)
-        {
-            if (product % firstMultiplier == 0)
-            {
-                int secondMultiplier = product / firstMultiplier;
 
-                std::clog << "first multiplier: " << firstMultiplier << "\nsecond multipiler: " << secondMultiplier << "\n\n";
-                
-                if (firstMultiplier <= m && secondMultiplier <= n && !contains(queue, {firstMultiplier, secondMultiplier}));
+        if (std::find(traversedProducts.begin(), traversedProducts.end(), product) == traversedProducts.end())
+        {
+            for (int firstMultiplier = 1; firstMultiplier <= product; firstMultiplier++)
+            {
+                if (product % firstMultiplier == 0)
                 {
-                    if (firstMultiplier == m && secondMultiplier == n)
+                    int secondMultiplier = product / firstMultiplier;
+
+                    std::clog << "first multiplier: " << firstMultiplier << "\nsecond multipiler: " << secondMultiplier << "\n\n";
+
+                    if (firstMultiplier <= m && secondMultiplier <= n)
+                        ;
                     {
-                        std::cout << "yes";
-                        return 0;
+                        if (firstMultiplier == m && secondMultiplier == n)
+                        {
+                            std::cout << "yes";
+                            return 0;
+                        }
+                        queue.push_back({firstMultiplier, secondMultiplier});
                     }
-                    queue.push_back({firstMultiplier, secondMultiplier});
                 }
             }
+            traversedProducts.push_back(product);
         }
 
         queue.erase(queue.begin());
