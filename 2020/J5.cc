@@ -36,30 +36,35 @@ int main()
         int product = rooms[r - 1][c - 1];
         std::clog << "product: " << product << "\n";
 
-        if (std::find(traversedProducts.begin(), traversedProducts.end(), product) == traversedProducts.end())
+        if (std::find(traversedProducts.begin(), traversedProducts.end(), product) != traversedProducts.end())
         {
-            for (int firstMultiplier = 1; firstMultiplier <= product; firstMultiplier++)
-            {
-                if (product % firstMultiplier == 0)
-                {
-                    int secondMultiplier = product / firstMultiplier;
-
-                    std::clog << "first multiplier: " << firstMultiplier << "\nsecond multipiler: " << secondMultiplier << "\n\n";
-
-                    if (firstMultiplier <= m && secondMultiplier <= n)
-                        ;
-                    {
-                        if (firstMultiplier == m && secondMultiplier == n)
-                        {
-                            std::cout << "yes";
-                            return 0;
-                        }
-                        queue.push_back({firstMultiplier, secondMultiplier});
-                    }
-                }
-            }
-            traversedProducts.push_back(product);
+            queue.erase(queue.begin());
+            continue;
         }
+
+        for (int firstMultiplier = 1; firstMultiplier <= product; firstMultiplier++)
+        {
+            if (product % firstMultiplier != 0)
+            {
+                continue;
+            }
+            int secondMultiplier = product / firstMultiplier;
+
+            std::clog << "first multiplier: " << firstMultiplier << "\nsecond multipiler: " << secondMultiplier << "\n\n";
+
+            if (!(firstMultiplier <= m) || !(secondMultiplier <= n))
+            {
+                continue;
+            }
+
+            if (firstMultiplier == m && secondMultiplier == n)
+            {
+                std::cout << "yes";
+                return 0;
+            }
+            queue.push_back({firstMultiplier, secondMultiplier});
+        }
+        traversedProducts.push_back(product);
 
         queue.erase(queue.begin());
     }
