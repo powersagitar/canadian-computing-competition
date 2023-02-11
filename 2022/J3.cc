@@ -4,6 +4,8 @@
 
 int main()
 {
+    std::cout.sync_with_stdio(false);
+
     // get input
     std::string input = "";
     do
@@ -11,23 +13,30 @@ int main()
         std::getline(std::cin, input);
     } while (input.empty());
 
-    for (const char &character : input)
+    bool prevNum = false;
+    for (size_t i = 0; i < input.length(); i++)
     {
-        if (character == '+')
+        if (input[i] == '+')
         {
             std::cout << " tighten ";
         }
-        else if (character == '-')
+        else if (input[i] == '-')
         {
             std::cout << " loosen ";
         }
-        else if (std::regex_match(std::to_string(character), std::regex("4[8-9]|5[0-7]"))) // the ascii reference between '0' and '9'
+        else if (std::regex_match(std::to_string(input[i]), std::regex("4[8-9]|5[0-7]"))) // the ascii reference between '0' and '9'
         {
-            std::cout << character << "\n";
+            std::cout << input[i];
+            prevNum = true;
         }
         else // character is [A-Z]
         {
-            std::cout << character;
+            if (prevNum)
+            {
+                std::cout << "\n";
+                prevNum = false;
+            }
+            std::cout << input[i];
         }
     }
 

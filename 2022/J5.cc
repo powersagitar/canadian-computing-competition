@@ -19,6 +19,8 @@ namespace
 
 int main()
 {
+    std::ios_base::sync_with_stdio(false);
+
     // get input
     // get yard size
     unsigned canvasSide = 0;
@@ -39,7 +41,7 @@ int main()
         unsigned divider = inputln.find(' ');
         unsigned x = stoul(inputln.substr(divider + 1));
         unsigned y = stoul(inputln.substr(0, divider));
-        
+
         // make coordinates use 0 based indexing
         trees.push_back({x - 1, y - 1});
     }
