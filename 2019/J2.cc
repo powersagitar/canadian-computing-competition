@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
+#include <string>
 
 int main()
 {
@@ -19,16 +21,15 @@ int main()
             std::getline(std::cin, inputln);
         } while (inputln.empty());
 
-        size_t divider = std::find(inputln.begin(), inputln.end(), ' ');
-        unsigned count = inputln.substr(0, divider);
-        char character = inputln.substr(divider + 1);
-        input.emplace_back({count, int(character)});
+        size_t divider = inputln.find(' ');
+        int count = std::stoul(inputln.substr(0, divider));
+        input.push_back({count, int(*inputln.rbegin())});
     }
 
     // main process
     for (const auto &vec : input)
     {
-        std::cout << std::setw(vec[0]) << std::setfill(char(vec[1])) << "\n";
+        std::cout << std::setw(vec[0]) << std::setfill(char(vec[1])) << char(vec[1]) << "\n";
     }
 
     return 0;
