@@ -4,6 +4,8 @@
 
 int main()
 {
+    std::ios_base::sync_with_stdio(false);
+
     // get input
     unsigned m = 0, n = 0;
     std::cin >> m >> n;
@@ -56,15 +58,15 @@ int main()
         }
 
         // debug: check what the array looks like
-        for (unsigned r = 0; r < m; r++)
-        {
-            for (unsigned c = 0; c < n; c++)
-            {
-                std::clog << canvas[r][c] << " ";
-            }
-            std::clog << "\n";
-        }
-        std::clog << std::endl;
+        // for (unsigned r = 0; r < m; r++)
+        // {
+        //     for (unsigned c = 0; c < n; c++)
+        //     {
+        //         std::clog << canvas[r][c] << " ";
+        //     }
+        //     std::clog << "\n";
+        // }
+        // std::clog << std::endl;
     }
 
     // count gold blocks

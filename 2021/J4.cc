@@ -4,6 +4,8 @@
 
 int main()
 {
+    std::ios_base::sync_with_stdio(false);
+
     std::string input = "";
     std::cin >> input;
 
@@ -24,8 +26,8 @@ int main()
         }
     }
 
-    std::cout << "output string: " << input << "\n";
-    std::cout << "swap count: " << swapCount;
+    // std::cout << "output string: " << input << "\n";
+    std::cout << swapCount;
 
     return 0;
 }
