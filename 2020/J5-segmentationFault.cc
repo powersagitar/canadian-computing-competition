@@ -49,6 +49,7 @@ int main()
                     // std::clog << "first multiplier: " << firstMultiplier << "\nsecond multipiler: " << secondMultiplier << "\n\n";
 
                     if (firstMultiplier <= m && secondMultiplier <= n)
+                        //! this semicolon is causing the segmentation fault. it disables the array boundary check performed by the if statement, causing segmentation fault.
                         ;
                     {
                         if (firstMultiplier == m && secondMultiplier == n)
