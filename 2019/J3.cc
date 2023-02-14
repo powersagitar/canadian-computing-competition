@@ -3,6 +3,15 @@
 #include <vector>
 #include <algorithm>
 
+namespace
+{
+    int continuousCount(const std::string &string, size_t startIndex, char target)
+    {
+        int count = 0;
+        for (; string[startIndex] == target; startIndex++, count++);
+    }
+}
+
 int main()
 {
     std::ios_base::sync_with_stdio(false);
