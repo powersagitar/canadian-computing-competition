@@ -3,13 +3,24 @@
 #include <vector>
 #include <algorithm>
 
-namespace debug
+namespace
 {
-    int continuousCount(const std::string &string, size_t startIndex, char target)
+    int continuousCount(const std::string &string, size_t startIndex, const char &target)
     {
         int count = 0;
         for (; string[startIndex] == target; startIndex++, count++)
-            ;
+        {
+        }
+        return count;
+    }
+
+    int continuousCount(const std::string &string, size_t startIndex, const std::string &target)
+    {
+        int count = 0;
+        size_t length = target.length();
+        for (; string.substr(startIndex, length) == target; startIndex += length, count++)
+        {
+        }
         return count;
     }
 }
@@ -37,7 +48,29 @@ int main()
     // main
     for (const std::string &string : inputv)
     {
-        std::clog << string << "\n";
+        // std::clog << string << "\n";
+
+        std::string substr;
+        for (size_t i = 0; i < string.length(); i++)
+        {
+            if (string[i] == '(')
+            {
+                size_t closeBracket = string.find(')', i);
+                std::string tmpSubstr = string.substr(i, closeBracket - i + 1);
+
+                // only execute the first occurrence of the substring in a duplication
+                if (!(tmpSubstr != substr))
+                {
+                    continue;
+                }
+
+                substr = tmpSubstr;
+                int count = continuousCount(string, i, substr);
+                std::cout << count << " ( ";
+
+                continue;
+            }
+        }
     }
 
     return 0;
