@@ -4,5 +4,5 @@
 
 TEST(Bundle1, Test1)
 {
-    EXPECT_EQ();
+    EXPECT_EQ(debug::continuousCount("555556", 0, 5), 5);
 }

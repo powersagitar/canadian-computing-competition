@@ -3,12 +3,14 @@
 #include <vector>
 #include <algorithm>
 
-namespace
+namespace debug
 {
     int continuousCount(const std::string &string, size_t startIndex, char target)
     {
         int count = 0;
-        for (; string[startIndex] == target; startIndex++, count++);
+        for (; string[startIndex] == target; startIndex++, count++)
+            ;
+        return count;
     }
 }
 
@@ -36,7 +38,6 @@ int main()
     for (const std::string &string : inputv)
     {
         std::clog << string << "\n";
-        
     }
 
     return 0;
