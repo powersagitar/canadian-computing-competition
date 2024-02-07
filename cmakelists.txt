@@ -1,5 +1,10 @@
-project(ccc)
+project(canadian-computing-competition)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(main ./2020/J5.cc)
+add_executable(main ./2019/J3.cc)
+
+# add_subdirectory(googletest)
+
+# add_executable(test ./tests/default.cc)
+# target_link_libraries(test gtest_main)
